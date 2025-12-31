@@ -23,13 +23,13 @@ The project focuses on **real-world booking logic**, **clean UI**, and **user-fr
 ## 🖼️ Screenshots
 
 ### 🏠 Home Page – Upcoming Events
-![Home Page](screenshots/event_homepage.png)
+![Home Page](events/screenshots/event_homepage.png)
 
 ### 📄 Event Detail Page
-![Event Detail](screenshots/event_confirmbook.png)
+![Event Detail](events/screenshots/event_confirmbook.png)
 
 ### 📋 My Bookings Page
-![My Bookings](screenshots/my_bookings.png)
+![My Bookings](events/screenshots/my_bookings.png)
 
 > 📌 *Screenshots are added from the project UI.*
 
