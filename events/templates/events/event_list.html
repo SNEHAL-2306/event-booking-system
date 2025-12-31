@@ -1,0 +1,42 @@
+{% extends 'events/base.html' %}
+{% block title %}Events List{% endblock %}
+{% block content %}
+<h2 class="text-center mb-4">Upcoming Events 🎟️</h2>
+
+
+<form method="GET" action="{% url 'event_list' %}" class="d-flex mb-4 justify-content-center">
+    <input type="text" name="q" class="form-control w-50 me-2" placeholder="🔍 Search by event name or location" value="{{ query|default:'' }}">
+    
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<div class="d-flex justify-content-center mb-4">
+    <a href="{% url 'event_list' %}" class="btn btn-secondary me-2">All Events</a>
+    <a href="?filter=upcoming" class="btn btn-primary">Upcoming Events</a>
+</div>
+
+
+
+<div class="row">
+    {% for event in events %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <p class="card-text">{{ event.description|truncatechars:80 }}</p>
+                <p><strong>Date:</strong> {{ event.date }}</p>
+                <p><strong>Price:</strong> ₹{{ event.price }}</p>
+                <p><strong>Seats Available:</strong> {{ event.seats }}</p>
+                <a href="{% url 'event_detail' event.id %}" class="btn btn-info btn-sm">
+                    View Details
+                </a>            </div>
+        </div>
+    </div>
+    {% empty %}
+
+    <p>No events available </p>
+
+
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Event Booking{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 🌈 Modern Gradient Navbar */
+        .navbar-custom {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #fff !important;
+        }
+
+        .nav-link {
+            color: #f0f0f0 !important;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #121005 !important;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            margin-top: 40px;
+            background-color: #222;
+            color: #ccc;
+            padding: 10px 0;
+            text-align: center;
+        }
+        /* 🌸 Soft themed alert (matches navbar, not copy) */
+
+        .custom-alert {
+          background-color: #41bcde;      
+          color: #212529;                 
+          
+          min-width: 300px;
+          font-weight: 500;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- 🌟 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'event_list' %}">🎟️ Event Booking</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'event_list' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'my_bookings' %}">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!-- Page content -->
+    {% if messages %}
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    {% for message in messages %}
+    <div class="alert alert-dismissible fade show shadow-sm custom-alert"
+     role="alert" id="autoDismissAlert">
+    {{ message }}
+</div>
+
+
+    {% endfor %}
+</div>
+{% endif %}
+
+
+    <footer>
+        <p>© 2025 Event Booking | Made with ❤️ by Snehal</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        setTimeout(function () {
+            const alert = document.getElementById("autoDismissAlert");
+            if (alert) {
+                alert.classList.remove("show");
+                alert.classList.add("fade");
+                setTimeout(() => alert.remove(), 500);
+            }
+        }, 5000); // 5 seconds
+    </script>
+    
+</body>
+</html>

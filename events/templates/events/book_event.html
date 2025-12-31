@@ -1,0 +1,28 @@
+{% extends 'events/base.html' %}
+{% block title %}Book Event{% endblock %}
+
+{% block content %}
+<div class="card mx-auto shadow" style="max-width: 500px;">
+    <div class="card-body">
+        <h3 class="card-title text-center">Book Event</h3>
+        <p><strong>Event:</strong> {{ event.title }}</p>
+        <p><strong>Date:</strong> {{ event.date }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Available Seats:</strong> {{ event.seats }}</p>
+        <p><strong>Price:</strong> ₹{{ event.price }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Number of Seats:</label>
+                <input type="number" name="seats" min="1" max="{{ event.seats }}" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success w-100">Confirm Booking</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'event_list' %}" class="btn btn-secondary">Back to Events</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

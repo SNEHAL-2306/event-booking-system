@@ -1,0 +1,53 @@
+{% extends 'events/base.html' %}
+{% block title %}My Bookings{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold text-primary">
+        🎟️ My Event Bookings
+    </h2>
+
+    {% if bookings %}
+    <div class="table-responsive shadow-lg rounded">
+        <table class="table table-hover align-middle text-center border">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Seats</th>
+                    <th scope="col">Booking Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-light">
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td class="fw-semibold text-dark">{{ booking.event.title }}</td>
+                    <td>{{ booking.event.date|date:"M d, Y - H:i" }}</td>
+                    <td>{{ booking.event.location }}</td>
+                    <td><span class="badge bg-success">{{ booking.seats_booked }}</span></td>
+                    <td>{{ booking.booking_date|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to cancel this booking?');">
+                        Cancel ❌
+                     </a>
+                                         </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center mt-5">
+        <img src="https://cdn-icons-png.flaticon.com/512/4076/4076500.png" alt="No bookings" width="100">
+        <p class="text-muted mt-3 fs-5">You haven’t booked any events yet 😢</p>
+        <a href="{% url 'event_list' %}" class="btn btn-primary mt-2">Book an Event 🎫</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
